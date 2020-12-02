@@ -21,8 +21,6 @@ public class Deck {
         }
     }
 
-
-
     //Shuffle deck of cards
     public void shuffle() {
         ArrayList<Cards> tempDeck = new ArrayList<Cards>();
@@ -32,7 +30,7 @@ public class Deck {
         int originalSize = this.cards.size();
         for (int i = 0; i < originalSize; i++) {
             //Generates random number / rand.nextInt((max - min) + 1) + min;
-            randomCard = random.nextInt((this.cards.size() - 1 - 0) + 1) + 0;
+            randomCard = random.nextInt((this.cards.size() - 1) + 1);
             //Throws a random card into new deck
             tempDeck.add(this.cards.get(randomCard));
             //Removes picked from old deck
@@ -41,6 +39,7 @@ public class Deck {
         //Sets this.deck to our newly shuffled deck
         this.cards = tempDeck;
     }
+
     public String toString() {
         String cardListOutput = "";
         int i = 0;
@@ -92,7 +91,7 @@ public class Deck {
                 }
             }
         for(int i = 0; i < Aces; i++) {
-            //for every aces player has; check total value
+            //for every aces player has this check total value
             if(totalValue > 10) {
                 totalValue += 1;
                 //if ace > 10 value gets valued to 1
@@ -101,5 +100,9 @@ public class Deck {
             }
         }
         return totalValue;
+    }
+
+    public int deckSize() {
+        return this.cards.size();
     }
 }
