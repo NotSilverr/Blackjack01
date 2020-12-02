@@ -8,7 +8,7 @@ public class Blackjack {
         Deck playingDeck = new Deck();
         //Create playing deck
         playingDeck.fullDeck();
-        playingDeck.shuffle();
+        playingDeck.shuffle();9
         //Creates deck for player & dealer
         Deck playerDeck = new Deck();
         Deck dealerDeck = new Deck();
