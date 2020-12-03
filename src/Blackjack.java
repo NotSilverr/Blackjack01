@@ -93,7 +93,7 @@ public class Blackjack {
             System.out.print("Dealer's hand is valued at: " + dealerDeck.cardsValue());
             //See's if dealer busted
             if ((dealerDeck.cardsValue() > 21) && endRound == false) {
-                System.out.println("Dealer busts! You win.");
+                System.out.println(" Dealer busts! You win.");
                 playerMoney += playerBet;
                 endRound = true;
             }
