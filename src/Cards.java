@@ -10,7 +10,7 @@ public class Cards {
 
     public String toString() {
         //allows us to print the value and suit
-        return this.suit.toString() + " " + this.value.toString();
+        return this.suit.toString() + "-" + this.value.toString();
         //returns suit and value
     }
 

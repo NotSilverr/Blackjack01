@@ -31,22 +31,24 @@ public class Blackjack {
                 break;
             }
 
-            endRound = false;
-
             //Starts dealing
             //Player obtains two cards
+            playerDeck.draw(playingDeck);
+            playerDeck.draw(playingDeck);
 
             //Dealer obtains two cards
-            playerDeck.draw(playerDeck);
-            playerDeck.draw(playerDeck);
+
+            dealerDeck.draw(playingDeck);
+            dealerDeck.draw(playingDeck);
+
 
             while (true) {
                 System.out.println("Your hand:");
                 System.out.print(playerDeck.toString());
-                System.out.println("Your hand is: " + playerDeck.cardsValue());
+                System.out.println(" Your hand is: " + playerDeck.cardsValue());
 
                 //Dealer hand
-                System.out.println("Dealer Hand: " + dealerDeck.getCard(0).toString() + "and [Hidden]");
+                System.out.println("Dealer Hand: " + dealerDeck.getCard(0).toString() + "and [Something Hidden]");
 
                 //Hit or stay player input
                 System.out.println("Would you like to (1) Hit or (2) Stand?");
@@ -73,20 +75,57 @@ public class Blackjack {
             }
             //Reveals cards
             System.out.println("Dealer Cards: " + dealerDeck.toString());
-            //Sees dealers hand
-            if ((dealerDeck.cardsValue() > playerDeck.cardsValue() && endRound == false));
-            System.out.println("Dealer wins!");
-            playerMoney -= playerBet;
-            endRound = true;
-        }
-        //Dealer draws at 16 and stands at 17
-        while ((dealerDeck.cardsValue() < 17) && endRound == false) {
-            dealerDeck.draw(playerDeck);
-            System.out.println("Dealer Draws: " + dealerDeck.getCard(dealerDeck.deckSize() - 1).toString());
-        }
+            //Sees dealers hand to check if it's more than player
+            if ((dealerDeck.cardsValue() > playerDeck.cardsValue() && endRound == false)) {
+                System.out.println("Dealer beats you " + dealerDeck.cardsValue() + " to " + playerDeck.cardsValue());
+                playerMoney -= playerBet;
+                endRound = true;
+            }
 
+            //Dealer draws at 16 and stands at 17
+            while ((dealerDeck.cardsValue() < 17) && endRound == false) {
+                dealerDeck.draw(playerDeck);
+                System.out.println("Dealer Draws: " + dealerDeck.getCard(dealerDeck.deckSize() - 1).toString());
+                //Indicates what the dealer just drew (added to arraylist)
+
+            }
+            //Displays total value for Dealer
+            System.out.print("Dealer's hand is valued at: " + dealerDeck.cardsValue());
+            //See's if dealer busted
+            if ((dealerDeck.cardsValue() > 21) && endRound == false) {
+                System.out.println("Dealer busts! You win.");
+                playerMoney += playerBet;
+                endRound = true;
+            }
+
+            //Determine if push/time
+            if ((dealerDeck.cardsValue() == playerDeck.cardsValue() && endRound == false)) {
+                System.out.println("Push");
+                endRound = true;
+            }
+
+            if ((playerDeck.cardsValue() > dealerDeck.cardsValue()) && endRound == false) {
+                System.out.println((" You win the hand!"));
+                playerMoney += playerBet;
+                endRound = true;
+            }
+            else if(endRound == false) {
+                //Dealer wins
+                System.out.println("You lose the hand!");
+                playerMoney -= playerBet;
+                endRound = true;
+            }
+
+            playerDeck.moveAllToDeck(playingDeck);
+            dealerDeck.moveAllToDeck(playerDeck);
+            //moves dealer cards and player decks back to the playing deck
+            System.out.println(" End of hand!");
+        }
 
         System.out.println("Game over, you lost all your money! Nice!");
+
+        userInput.close();
+        //Closes game afterwards
     }
 
  }
