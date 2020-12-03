@@ -54,7 +54,7 @@ public class Deck {
         this.cards.remove(i);
     }
 
-    public Cards getCard(int i){
+    public Cards getCard(int i) {
         return this.cards.get(i);
     }
 
