@@ -27,7 +27,7 @@ public class Blackjack {
             // Asks how much money you have and asks for bet amount
             double playerBet = userInput.nextDouble();
             if (playerBet > playerMoney) {
-                System.out.println("You don't have that much money, poors out");
+                System.out.println("You don't have that much money, poors out!");
                 break;
             }
 

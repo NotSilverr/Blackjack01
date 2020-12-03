@@ -50,20 +50,38 @@ public class Deck {
         return cardListOutput;
     }
 
-    public void removeCard(int i) {
+    public void removeCard(int i){
         this.cards.remove(i);
     }
-    public Cards getCard(int i) {
+
+    public Cards getCard(int i){
         return this.cards.get(i);
     }
-    public void addCard(Cards addCard) {
+
+
+
+    public void addCard(Cards addCard){
         this.cards.add(addCard);
     }
+
 
     //Draw card from the deck
     public void draw(Deck comingFrom) {
         this.cards.add(comingFrom.getCard(0));
         comingFrom.removeCard(0);
+    }
+
+    public void moveAllToDeck(Deck moveTo) {
+        int thisDeckSize = this.cards.size();
+
+        // Put cards into moveTo deck
+        for(int i = 0; i < thisDeckSize; i++) {
+            moveTo.addCard(this.getCard(i));
+        }
+
+        for (int i = 0; i < thisDeckSize; i++) {
+            this.removeCard(0);
+        }
     }
 
     public int cardsValue() {
@@ -73,30 +91,32 @@ public class Deck {
         //ace card tracker
 
         for(Cards aCard : this.cards) {
-            switch(aCard.getValue()) {
-                // Checks values of the cards
-                case TWO: totalValue += 2; break;
-                case THREE: totalValue += 3; break;
-                case FOUR: totalValue += 4; break;
-                case FIVE: totalValue += 5; break;
-                case SIX: totalValue += 6; break;
-                case SEVEN: totalValue += 7; break;
-                case EIGHT: totalValue += 8; break;
-                case NINE: totalValue += 9; break;
-                case TEN: totalValue += 10; break;
-                case JACK: totalValue += 10; break;
-                case QUEEN: totalValue += 10; break;
-                case KING: totalValue += 10; break;
-                case ACE: totalValue += 1; break;
+            // Checks values of the cards
+            switch(aCard.getValue()){
+                case Two: totalValue += 2; break;
+                case Three: totalValue += 3; break;
+                case Four: totalValue += 4; break;
+                case Five: totalValue += 5; break;
+                case Six: totalValue += 6; break;
+                case Seven: totalValue += 7; break;
+                case Eight: totalValue += 8; break;
+                case Nine: totalValue += 9; break;
+                case Ten: totalValue += 10; break;
+                case Jack: totalValue += 10; break;
+                case Queen: totalValue += 10; break;
+                case King: totalValue += 10; break;
+                case Ace: Aces += 1; break;
                 }
             }
+
         for(int i = 0; i < Aces; i++) {
             //for every aces player has this check total value
             if(totalValue > 10) {
                 totalValue += 1;
-                //if ace > 10 value gets valued to 1
+                //if ace > 10 value gets valued to 1 (> 1 ace)
             } else {
                 totalValue += 11;
+                // for first ace drawn
             }
         }
         return totalValue;
@@ -104,5 +124,6 @@ public class Deck {
 
     public int deckSize() {
         return this.cards.size();
+
     }
 }
