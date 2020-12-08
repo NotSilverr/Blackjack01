@@ -102,14 +102,14 @@ public class Blackjack {
             System.out.print("Dealer's hand is valued at: " + dealerHand.cardsValue());
             //See's if dealer busted
             if ((dealerHand.cardsValue() > 21) && endRound == false) {
-                System.out.println("Dealer busts! You win.");
+                System.out.println(" Dealer busts! You win.");
                 playerMoney += playerBet;
                 endRound = true;
             }
 
             //Determine if push/time
             if ((dealerHand.cardsValue() == playerHand.cardsValue() && endRound == false)) {
-                System.out.println("Push");
+                System.out.println(" Push");
                 endRound = true;
             }
 
@@ -120,7 +120,7 @@ public class Blackjack {
             }
             else if(endRound == false) {
                 //Dealer wins
-                System.out.println("You lose the hand!");
+                System.out.println(" You lose the hand!");
                 playerMoney -= playerBet;
                 endRound = true;
             }
